@@ -65,6 +65,22 @@
      </dependency>
    </dependencies>
   <build>
-    <finalName>app</finalName>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <!-- build war -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <warName>cms-web</warName>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

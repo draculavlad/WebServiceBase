@@ -1,4 +1,4 @@
-package com.yangcms.core.configuration;
+package com.yangcms.core.service.configuration;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.MappingJsonFactory;

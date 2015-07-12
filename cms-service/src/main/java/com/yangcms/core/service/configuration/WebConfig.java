@@ -1,9 +1,7 @@
-package com.yangcms.core.configuration;
+package com.yangcms.core.service.configuration;
 
 import java.io.*;
 import java.util.*;
-import javax.activation.MimetypesFileTypeMap;
-import org.apache.commons.configuration.ConfigurationException;
 
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.slf4j.Logger;
@@ -47,7 +45,7 @@ public class WebConfig {
    		cfg.setDelimiterParsingDisabled(true);
 
    		// First, load default configuration from classpath as fallback
-   		cfg.load(openConfiguration("classpath:app-config.properties"));
+   		cfg.load(openConfiguration("classpath: configuration.properties"));
 
    		result.putAll(convertToProperties(cfg));
 
