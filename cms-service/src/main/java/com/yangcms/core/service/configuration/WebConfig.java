@@ -30,26 +30,17 @@ public class WebConfig {
 
    	@Bean(name="applicationConfiguration")
    	public Properties appConfig() throws IOException, org.apache.commons.configuration.ConfigurationException {
-   		Properties properties = new Properties();
-   		if(!configurationResource.exists()){
-   			logger.error("Could not find root configuration file.");
-   			throw new FileNotFoundException("Root configuration file.");
-   		}
+        Properties properties = new Properties();
+      		if(!configurationResource.exists()){
+      			logger.error("Could not find root configuration file.");
+      			throw new FileNotFoundException("Root configuration file.");
+      		}
 
-   		properties.load(configurationResource.getInputStream());
-   		String configurationLocation = properties.getProperty("configuration.location");
-
-   		Properties result = null;
-   		logger.info("Will use configuration file {} to override the default.", configurationLocation);
-   		PropertiesConfiguration cfg = new PropertiesConfiguration();
-   		cfg.setDelimiterParsingDisabled(true);
-
-   		// First, load default configuration from classpath as fallback
-   		cfg.load(openConfiguration("classpath: configuration.properties"));
-
-   		result.putAll(convertToProperties(cfg));
-
-   		return result;
+           PropertiesConfiguration cfg = new PropertiesConfiguration();
+         	cfg.setDelimiterParsingDisabled(true);
+           cfg.load(configurationResource.getInputStream());
+           properties.putAll(convertToProperties(cfg));
+        return properties;
    	}
 
    	private Properties convertToProperties(PropertiesConfiguration cfg) {
@@ -63,14 +54,4 @@ public class WebConfig {
    	}
 
 
-   	private InputStream openConfiguration(String location) throws IOException {
-   		logger.info("Loading configuration from: {}", location);
-   		DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
-   		Resource resource = resourceLoader.getResource(location);
-   		if (!resource.exists()) {
-   			throw new FileNotFoundException(location);
-   		}
-
-   		return resource.getInputStream();
-   	}
 }
